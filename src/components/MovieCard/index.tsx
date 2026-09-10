@@ -23,34 +23,28 @@ export default function MovieCard({
       whileHover={{ scale: 1.05 }}
       className="p-4"
     >
-      <div className="w-50 h-50 border rounded-lg relative hover:cursor-pointer">
+      <div className="w-50 h-60 border rounded-lg relative hover:cursor-pointer">
         <img
           src={imageURL}
           alt={`${title} capa`}
-          className="absolute top-0 left-0 w-full h-full"
+          className="absolute top-0 left-0 w-full h-full rounded-lg"
         />
       </div>
 
       {hovered && (
         <AnimatePresence>
-          <motion.h2
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -50 }}
-            transition={{ duration: 0.5 }}
-            className="text-center font-bold"
-          >
-            {title} - ({year})
-          </motion.h2>
-          <motion.p
+          <motion.div
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -50 }}
             transition={{ duration: 0.5 }}
             className="text-center"
           >
-            ⭐ {rating}
-          </motion.p>
+            <h2 className="font-bold">
+              {title} - ({year})
+            </h2>
+            <p>⭐ {rating}</p>
+          </motion.div>
         </AnimatePresence>
       )}
     </motion.div>
