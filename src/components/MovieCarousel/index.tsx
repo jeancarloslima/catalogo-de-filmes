@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import MovieCard from "../MovieCard";
+import { useRef } from "react";
 
 const movies = [
   {
@@ -7,7 +8,10 @@ const movies = [
     title: "The Social Network",
     year: 2010,
     rating: 3.9,
-    synopsis: "",
+    synopsis: `You don’t get to 500 million friends without making a few enemies.
+
+In 2003, Harvard undergrad and computer programmer Mark Zuckerberg begins work on a new concept that eventually turns into the global social network known as Facebook. Six years later, Mark is one of the youngest billionaires ever, but his unprecedented success leads to both personal and legal complications when he ends up on the receiving end of two lawsuits, one involving his former friend.
+`
   },
   {
     imageURL: "/images/little-miss-sunshine-cover.jpg",
@@ -75,24 +79,25 @@ const movies = [
 ];
 
 export default function MovieCarousel() {
+  const constraintRef = useRef(null);
+
   return (
-    <motion.div 
-        drag="x"
-        dragConstraints={{
-            right: 50,
-            left: 50,
-        }}
-        className="min-h-95 flex gap-2 p-4"
+    <motion.div
+      ref={constraintRef}
+      className="min-h-95 p-4 bg-red-300 self-start"
     >
-      {movies.map((movie, index) => (
-        <MovieCard
-          key={index}
-          imageURL={movie.imageURL}
-          title={movie.title}
-          year={movie.year}
-          rating={movie.rating}
-        />
-      ))}
+      <motion.div drag="x" className="flex gap-2">
+        {movies.map((movie, index) => (
+          <MovieCard
+            key={index}
+            imageURL={movie.imageURL}
+            title={movie.title}
+            year={movie.year}
+            rating={movie.rating}
+            synopsis={movie.synopsis}
+          />
+        ))}
+      </motion.div>
     </motion.div>
   );
 }
