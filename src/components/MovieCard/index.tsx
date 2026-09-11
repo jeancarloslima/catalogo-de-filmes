@@ -1,6 +1,12 @@
 import { motion } from 'framer-motion';
+import { Movie } from '../../types/types';
 
-export default function MovieCard({ filme, onClick }) {
+interface MovieCardProps {
+  filme: Movie;
+  onClick: () => void;
+}
+
+export default function MovieCard({ filme, onClick }: MovieCardProps) {
   return (
     <motion.div
       layoutId={`card-container-${filme.id}`}

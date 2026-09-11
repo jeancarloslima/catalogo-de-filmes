@@ -2,8 +2,9 @@ import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import MovieCarousel from "./components/MovieCarousel";
 import MovieDetails from "./components/MovieDetails";
+import { Movie } from "./types/types";
 
-const FILMES = [
+const FILMES = Movie[] = [
   {
     id: "1",
     title: "Drive",
@@ -83,6 +84,7 @@ const FILMES = [
     synopsis: "A family loaded with quirky, colorful characters piles into an old van and road trips to California for little Olive to compete in a beauty pageant.",
   },
 ];
+
 
 export default function App() {
   const [filmeSelecionado, setFilmeSelecionado] = useState(null);

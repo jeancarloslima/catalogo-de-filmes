@@ -1,8 +1,15 @@
 import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import MovieCard from '../MovieCard';
+import { Movie } from '../../types/types';
 
-export default function MovieCarousel({ filmes, onSelect, isModalOpen }) {
+interface MovieCarouselProps {
+  filmes: Movie[];
+  onSelect: (filme: Movie) => void;
+  isModalOpen: boolean;
+}
+
+export default function MovieCarousel({ filmes, onSelect, isModalOpen }: MovieCarouselProps) {
   const carouselRef = useRef(null);
 
   return (

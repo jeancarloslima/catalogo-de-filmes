@@ -1,7 +1,13 @@
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { Movie } from '../../types/types';
 
-export default function MovieDetails({ filme, onClose }) {
+interface MovieDetailsProps {
+    filme: Movie;
+    onClose: () => void;
+}
+
+export default function MovieDetails({ filme, onClose }: MovieDetailsProps) {
   useEffect(() => {
     document.body.style.overflow = 'hidden';
     return () => {
