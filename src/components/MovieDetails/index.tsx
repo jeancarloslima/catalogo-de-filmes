@@ -1,49 +1,61 @@
-import { motion } from "framer-motion";
+import { useEffect } from 'react';
+import { motion } from 'framer-motion';
 
-interface MovieCardProps {
-  imageURL: string;
-  title: string;
-  year: number;
-  rating: number;
-  synopsis: string;
-  closeModal: () => void;
-}
-
-const container = {
-  visible: {
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
-};
-
-const animatedItem = {
-  hidden: { opacity: 0, x: 0 },
-  visible: { opacity: 1, x: 0 },
-};
-
-export default function MovieDetails({
-  imageURL,
-  title,
-  year,
-  rating,
-  synopsis,
-  closeModal
-}: MovieCardProps) {
+export default function MovieDetails({ filme, onClose }) {
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, []);
 
   return (
-    <div className="w-screen h-screen absolute top-0 left-0 flex items-center justify-center bg-black/50 overflow-hidden z-50">
+    <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
       <motion.div
-        variants={container}
-        initial="hidden"
-        animate="visible"
-        className="w-100 p-4 pt-10 flex flex-col gap-4 rounded-xl text-center bg-white text-black relative"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onClick={onClose}
+        className="absolute inset-0 bg-black/80 backdrop-blur-sm cursor-pointer"
+      />
+      <motion.div
+        layoutId={`card-container-${filme.id}`}
+        className="relative z-10 bg-zinc-900 rounded-2xl w-full max-w-4xl flex flex-col md:flex-row overflow-hidden shadow-2xl"
       >
-        <motion.button onClick={closeModal} className="absolute top-2 right-4 text-2xl font-bold text-red-500 hover:cursor-pointer">X</motion.button>
-        <motion.img variants={animatedItem} src={imageURL} alt={`Capa ${title}`} className="h-100" />
-        <motion.h2 variants={animatedItem} className="text-2xl font-bold">{title} - ({year})</motion.h2>
-        <motion.span variants={animatedItem} className="block bg-red-300 text-xl">⭐ {rating}</motion.span>
-        <motion.p variants={animatedItem} className="text-justify text-sm">{synopsis}</motion.p>
+        <motion.img
+          layoutId={`poster-${filme.id}`}
+          src={filme.img}
+          alt={filme.title}
+          className="w-full md:w-1/2 object-cover md:h-[600px]"
+        />
+        <div className="p-8 flex flex-col justify-center">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="text-4xl font-bold mb-2"
+          >
+            {filme.title}
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-zinc-400 text-lg uppercase tracking-wider mb-8"
+          >
+            {filme.theme}
+          </motion.p>
+
+          <motion.button
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            onClick={onClose}
+            className="mt-auto bg-zinc-800 hover:bg-zinc-700 py-3 px-6 rounded-lg font-medium self-start transition-colors"
+          >
+            Voltar ao Catálogo
+          </motion.button>
+        </div>
       </motion.div>
     </div>
   );
