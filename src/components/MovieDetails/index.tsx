@@ -28,32 +28,36 @@ export default function MovieDetails({ filme, onClose }) {
           alt={filme.title}
           className="w-full md:w-1/2 object-cover md:h-[600px]"
         />
-        <div className="p-8 flex flex-col justify-center">
+        <div className="w-[50%] p-8 flex flex-col justify-center">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-4xl font-bold mb-2"
+            className="text-4xl font-bold mb-4"
           >
             {filme.title}
           </motion.h2>
+          <motion.span className='max-w-20 py-1 px-3 mb-4 bg-red-500 inline-flex rounded'>
+           ⭐ {filme.rating}
+          </motion.span>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-zinc-400 text-lg uppercase tracking-wider mb-8"
+            className="text-zinc-400 text-lg text-justify tracking-wider mb-8"
           >
-            {filme.theme}
+            {filme.synopsis}
           </motion.p>
+          
 
           <motion.button
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
             onClick={onClose}
-            className="mt-auto bg-zinc-800 hover:bg-zinc-700 py-3 px-6 rounded-lg font-medium self-start transition-colors"
+            className="mt-auto bg-red-500 hover:bg-red-400 py-3 px-6 rounded-lg font-medium self-start hover:cursor-pointer"
           >
-            Voltar ao Catálogo
+            Voltar
           </motion.button>
         </div>
       </motion.div>
